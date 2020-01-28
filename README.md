@@ -18,6 +18,4 @@ demo:
 
 ![]( https://github.com/dzzhang96/Points-Registration-ICP/blob/master/registration.gif)
 
-You can also save the matrix and the coordinates of points.
-
 
