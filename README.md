@@ -3,6 +3,7 @@
 Orbital Rim Registration Software V1.1
 
 Save the registered model by multiplying the transform matrix.
+Redesigned UI.
 
 Orbital Rim Registration Software V1.0
 
