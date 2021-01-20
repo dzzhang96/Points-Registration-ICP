@@ -12,7 +12,6 @@ VTK_MODULE_INIT(vtkRenderingFreeType)
 
 vector<ImagePoint*> imagePointVector_before;
 vector<ImagePoint*> imagePointVector_after;
-QColor color = {155,155,155};
 bool isPointsregistration;
 
 Registration::Registration(QWidget *parent)
@@ -20,11 +19,12 @@ Registration::Registration(QWidget *parent)
 {
 	ui.setupUi(this);
 	renderer = vtkSmartPointer<vtkRenderer>::New();
-	actor = vtkSmartPointer<vtkActor>::New();
+	actor1 = vtkSmartPointer<vtkActor>::New();
 	renderer2 = vtkSmartPointer<vtkRenderer>::New();
 	actor2 = vtkSmartPointer<vtkActor>::New();
 	renderer3 = vtkSmartPointer<vtkRenderer>::New();
 	actor3 = vtkSmartPointer<vtkActor>::New();
+	stlwriter = vtkSmartPointer<vtkSTLWriter>::New();
 
 	m_EventQtSlotConnect = vtkEventQtSlotConnect::New();
 	m_EventQtSlotConnect_2 = vtkEventQtSlotConnect::New();
@@ -33,23 +33,31 @@ Registration::Registration(QWidget *parent)
 	ui.qvtkWidget_before->GetRenderWindow()->AddRenderer(renderer);
 	ui.qvtkWidget_after->GetRenderWindow()->AddRenderer(renderer2);
 	ui.qvtkWidget_registration->GetRenderWindow()->AddRenderer(renderer3);
-
+	//ui.model1Color_pushButton->setDisabled(true);
+	//ui.model2Color_pushButton->setDisabled(true);
+	//ui.pushButton_registration->setDisabled(true);
+	//ui.pushButton_saveSTL->setDisabled(true);
+	color_stl1 = { 255, 0, 0};
+	color_stl2 = { 0, 255, 0};
+	isPointsregistration = false;
 
 }
 
 void Registration::initSlot()
 {
-	this->connect(ui.pushButton_STL1, SIGNAL(clicked()), this, SLOT(OnAddSTLFile_clicked()));
-	this->connect(ui.pushButton_STL2, SIGNAL(clicked()), this, SLOT(OnAddSTLFile_clicked_2()));
+	this->connect(ui.pushButton_STL1, SIGNAL(clicked()), this, SLOT(OnAddSTL1File_clicked()));
+	this->connect(ui.pushButton_STL2, SIGNAL(clicked()), this, SLOT(OnAddSTL2File_clicked()));
 	this->connect(ui.pushButton_registration, SIGNAL(clicked()), this, SLOT(StartRegistration()));
-	this->connect(ui.modelColor_pushButton, SIGNAL(clicked()), this, SLOT(OnChangePropertyColor_clicked()));
-	this->connect(ui.pushButton_savetxt, SIGNAL(clicked()), this, SLOT(OnSetSaveTXT_clicked()));
+	this->connect(ui.model1Color_pushButton, SIGNAL(clicked()), this, SLOT(OnChangePropertyColor_model1_clicked()));
+	this->connect(ui.model2Color_pushButton, SIGNAL(clicked()), this, SLOT(OnChangePropertyColor_model2_clicked()));
+	this->connect(ui.pushButton_saveSTL, SIGNAL(clicked()), this, SLOT(OnSetSaveSTL_clicked()));
+	this->connect(ui.checkBox_stl, SIGNAL(clicked()), this, SLOT(OnChangeRegistration_clicked()));
 	this->connect(ui.checkBox_points, SIGNAL(clicked()), this, SLOT(OnChangeRegistration_clicked()));
 	m_EventQtSlotConnect->Connect(ui.qvtkWidget_before->GetRenderWindow()->GetInteractor(), vtkCommand::RightButtonPressEvent, this, SLOT(OnRightButtonPress(vtkObject*, unsigned long)));
 	m_EventQtSlotConnect_2->Connect(ui.qvtkWidget_after->GetRenderWindow()->GetInteractor(), vtkCommand::RightButtonPressEvent, this, SLOT(OnRightButtonPress_2(vtkObject*, unsigned long)));
 }
 
-void Registration::OnAddSTLFile_clicked()
+void Registration::OnAddSTL1File_clicked()
 {
 	renderer->Clear();
 	renderer->RemoveAllViewProps();
@@ -60,6 +68,7 @@ void Registration::OnAddSTLFile_clicked()
 		QMessageBox::warning(0, "Warning", "No File Be Opened");
 		return; 
 	}
+	ui.STL1Name_lineEdit->setText(filepath);
 	// 支持带中文路径的读取  
 	QByteArray ba = filepath.toLocal8Bit();
 	const char *fileName_str = ba.data();
@@ -72,20 +81,21 @@ void Registration::OnAddSTLFile_clicked()
 	vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
 	mapper->SetInputData(reader->GetOutput());
 
-	actor->SetMapper(mapper);
-	actor->GetProperty()->SetColor(1, 0, 0);
+	actor1->SetMapper(mapper);
+	actor1->GetProperty()->SetColor(double(color_stl1.red()) / 255, double(color_stl1.green()) / 255, double(color_stl1.blue()) / 255);
 	//actor->GetProperty()->SetOpacity(0.8);
 
-	renderer->AddActor(actor);
+	renderer->AddActor(actor1);
 	renderer->ResetCamera();
 
 	ui.qvtkWidget_before->GetRenderWindow()->AddRenderer(renderer);
 	ui.qvtkWidget_before->show();
+	//ui.model1Color_pushButton->setEnabled(true);
 }
 
 
 
-void Registration::OnAddSTLFile_clicked_2()
+void Registration::OnAddSTL2File_clicked()
 {
 	renderer2->Clear();
 	renderer2->RemoveAllViewProps();
@@ -96,6 +106,7 @@ void Registration::OnAddSTLFile_clicked_2()
 		QMessageBox::warning(0, "Warning", "No File Be Opened");
 		return;
 	}
+	ui.STL2Name_lineEdit->setText(filepath);
 	// 支持带中文路径的读取  
 	QByteArray ba = filepath.toLocal8Bit();
 	const char *fileName_str = ba.data();
@@ -108,12 +119,13 @@ void Registration::OnAddSTLFile_clicked_2()
 	vtkSmartPointer<vtkPolyDataMapper> mapper2 = vtkSmartPointer<vtkPolyDataMapper>::New();
 	mapper2->SetInputData(reader2->GetOutput());
 	actor2->SetMapper(mapper2);
-	actor2->GetProperty()->SetColor(155/255.0, 155/255.0, 155/255.0);
+	actor2->GetProperty()->SetColor(double(color_stl2.red()) / 255, double(color_stl2.green()) / 255, double(color_stl2.blue()) / 255);
 	renderer2->AddActor(actor2);
 	renderer2->ResetCamera();
 
 	ui.qvtkWidget_after->GetRenderWindow()->AddRenderer(renderer2);
 	ui.qvtkWidget_after->show();
+	//ui.model2Color_pushButton->setEnabled(true);
 }
 
 
@@ -185,9 +197,6 @@ vtkSmartPointer<vtkIterativeClosestPointTransform> icptransProcess(vtkSmartPoint
 		stableSource->SetPoints(stable->GetPoints());
 	}
 
-	
-
-
 	vtkSmartPointer<vtkVertexGlyphFilter>  transGlyph =
 		vtkSmartPointer<vtkVertexGlyphFilter>::New();
 	transGlyph->SetInputData(transSource);
@@ -197,7 +206,6 @@ vtkSmartPointer<vtkIterativeClosestPointTransform> icptransProcess(vtkSmartPoint
 		vtkSmartPointer<vtkVertexGlyphFilter>::New();
 	stableGlyph->SetInputData(stableSource);
 	stableGlyph->Update();
-
 
 	//进行ICP配准求变换矩阵
 	vtkSmartPointer<vtkIterativeClosestPointTransform> icptrans =
@@ -211,14 +219,13 @@ vtkSmartPointer<vtkIterativeClosestPointTransform> icptransProcess(vtkSmartPoint
 	icptrans->StartByMatchingCentroidsOn();
 	icptrans->Modified();
 	icptrans->Update();
-
 	return icptrans;
 }
 
 void Registration::StartRegistration()
 {
-	//renderer3->Clear();
-	//renderer3->RemoveAllViewProps();
+	renderer3->Clear();
+	renderer3->RemoveAllViewProps();
 
 	//获得STL的模型1
 	vtkSmartPointer<vtkSTLReader> stableReader = vtkSmartPointer<vtkSTLReader>::New();
@@ -232,11 +239,9 @@ void Registration::StartRegistration()
 	transReader1->Update();
 	vtkSmartPointer<vtkPolyData> transSTL1 = transReader1->GetOutput();
 
-
 	//分别于第一个orig进行ICP配准
 	icptrans1 = vtkSmartPointer<vtkIterativeClosestPointTransform>::New();
 	icptrans1 = icptransProcess(transSTL1, stableSTL);
-
 
 	//变换stl模型1
 	vtkSmartPointer<vtkTransformPolyDataFilter> transformFilter1 =
@@ -245,11 +250,15 @@ void Registration::StartRegistration()
 	transformFilter1->SetTransform(icptrans1);
 	transformFilter1->Update();
 
+	//保存配准转换后的STL
+	/*vtkSmartPointer<vtkSTLWriter>stlwriter = vtkSmartPointer<vtkSTLWriter>::New();*/
+	stlwriter->SetInputConnection(transformFilter1->GetOutputPort());
+	stlwriter->SetFileTypeToBinary();
+	//stlwriter->SetFileName("result.stl");
+	//stlwriter->Write();
 
 	vtkSmartPointer<vtkMatrix4x4> m = icptrans1->GetMatrix();
 	std::cout << "The resulting matrix is: " << *m << std::endl;
-
-
 
 	vtkSmartPointer<vtkPolyDataMapper> stableMapper =
 		vtkSmartPointer<vtkPolyDataMapper>::New();
@@ -259,7 +268,7 @@ void Registration::StartRegistration()
 		vtkSmartPointer<vtkActor>::New();
 	stableActor->SetMapper(stableMapper);
 	//stableActor->GetProperty()->SetOpacity(0.8);
-	stableActor->GetProperty()->SetColor(1, 0, 0);
+	stableActor->GetProperty()->SetColor(double(color_stl1.red()) / 255, double(color_stl1.green()) / 255, double(color_stl1.blue()) / 255);
 	stableActor->GetProperty()->SetPointSize(3);
 	//targetActor->GetProperty()->SetRepresentationToSurface();
 
@@ -272,8 +281,8 @@ void Registration::StartRegistration()
 	transActor->SetMapper(transMapper1);
 	//transActor->GetProperty()->SetOpacity(0.8);
 	//transActor->GetProperty()->SetColor(0, 1, 0);
-	transActor->GetProperty()->SetColor(double(color.red()) / 255, double(color.green()) / 255, double(color.blue()) / 255);
-	transActor->GetProperty()->SetPointSize(2);
+	transActor->GetProperty()->SetColor(double(color_stl2.red()) / 255, double(color_stl2.green()) / 255, double(color_stl2.blue()) / 255);
+	transActor->GetProperty()->SetPointSize(0.5);
 
 	//sourceActor->GetProperty()->SetRepresentationToWireframe();
 
@@ -305,8 +314,6 @@ void Registration::OnRightButtonPress(vtkObject* caller, unsigned long vtk_event
 		interactor->GetEventPosition()[1],
 		0,
 		interactor->GetRenderWindow()->GetRenderers()->GetFirstRenderer());
-	
-
 	double picked[3];
 	picker->GetPickPosition(picked);
 	//picker->GetMapperPosition(picked);
@@ -432,7 +439,7 @@ void Registration::addrenderer3(vector<ImagePoint*> vectorPoints)
 			vtkSmartPointer<vtkActor> transformedActor =
 				vtkSmartPointer<vtkActor>::New();
 			transformedActor->SetMapper(transformedMapper);  
-			transformedActor->GetProperty()->SetColor(double(color.red()) / 255, double(color.green()) / 255, double(color.blue()) / 255);
+			transformedActor->GetProperty()->SetColor(double(color_stl2.red()) / 255, double(color_stl2.green()) / 255, double(color_stl2.blue()) / 255);
 
 			renderer3->AddActor(transformedActor);
 		}
@@ -440,6 +447,17 @@ void Registration::addrenderer3(vector<ImagePoint*> vectorPoints)
 	}
 	
 }
+
+void Registration::OnSetSaveSTL_clicked()
+{
+	fileName = QFileDialog::getSaveFileName(this, tr("Select Save Path"), "", tr("TXT(*.stl)")); //选择路径	
+	QByteArray fileName_QByteArray = fileName.toLatin1(); // must
+	char* fileName_char = fileName_QByteArray.data();
+	stlwriter->SetFileName(fileName_char);
+    stlwriter->Write();
+	ui.STL2RegistrationName_lineEdit->setText(fileName);
+}
+
 
 void Registration::OnSetSaveTXT_clicked() {
 	fileName = QFileDialog::getSaveFileName(this, tr("Select Save Path"), "", tr("TXT(*.txt)")); //选择路径
@@ -482,16 +500,34 @@ void Registration::writeDataToTXT(double* order, double* x, double* y, double* z
 	//ui.textEdit->append(QStringLiteral("TXT文件保存完成！"));
 }
 
-void Registration::OnChangePropertyColor_clicked()
+void Registration::OnChangePropertyColor_model1_clicked()
 {
-	color = QColorDialog::getColor(Qt::white, this);
-	actor2->GetProperty()->SetColor(double(color.red()) / 255, double(color.green()) / 255, double(color.blue()) / 255);
+	color_stl1 = QColorDialog::getColor(Qt::white, this);
+	actor1->GetProperty()->SetColor(double(color_stl1.red()) / 255, double(color_stl1.green()) / 255, double(color_stl1.blue()) / 255);
+	ui.qvtkWidget_after->update();
+}
+
+
+void Registration::OnChangePropertyColor_model2_clicked()
+{
+	color_stl2 = QColorDialog::getColor(Qt::white, this);
+	actor2->GetProperty()->SetColor(double(color_stl2.red()) / 255, double(color_stl2.green()) / 255, double(color_stl2.blue()) / 255);
 	ui.qvtkWidget_after->update();
 }
 
 void Registration::OnChangeRegistration_clicked()
 {
-	if(ui.checkBox_points->checkState()==Qt::Checked)
+	if(ui.checkBox_stl->checkState()==Qt::Checked)
+	{
+		isPointsregistration = false;
+	}
+	else
+	{
+		isPointsregistration = true;
+	}
+
+
+	if (ui.checkBox_points->checkState() == Qt::Checked)
 	{
 		isPointsregistration = true;
 	}
@@ -499,5 +535,6 @@ void Registration::OnChangeRegistration_clicked()
 	{
 		isPointsregistration = false;
 	}
+	//ui.pushButton_registration->setEnabled(true);
 	std::cout << isPointsregistration << std::endl;
 }

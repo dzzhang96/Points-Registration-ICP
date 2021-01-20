@@ -44,6 +44,7 @@
 #include <vtkExtractSurface.h>
 #include <vtkTransformPolyDataFilter.h>
 #include <vtkNamedColors.h>
+#include <vtkSTLWriter.h>
 #include "vtkAutoInit.h"
 #include <QFileDialog>
 #include <QTextStream>
@@ -75,27 +76,33 @@ public:
 	Registration(QWidget *parent = Q_NULLPTR);
 	vtkSmartPointer<vtkSTLReader> reader;
 	vtkSmartPointer<vtkRenderer> renderer;
-	vtkSmartPointer<vtkActor> actor;
+	vtkSmartPointer<vtkActor> actor1;
 	vtkSmartPointer<vtkSTLReader> reader2;
 	vtkSmartPointer<vtkRenderer> renderer2;
 	vtkSmartPointer<vtkActor> actor2;
 	vtkSmartPointer<vtkRenderer> renderer3;
 	vtkSmartPointer<vtkActor> actor3;
+	vtkSmartPointer<vtkSTLWriter>stlwriter;
 
 	void initSlot();
 	vtkSmartPointer<vtkEventQtSlotConnect> m_EventQtConnector;
 
 	void writeDataToTXT(double* order, double* x, double* y, double* z, QString filename, int num);
 	QString fileName;
+	QColor color_stl1;
+	QColor color_stl2;
+
 
 public slots:
-	void OnAddSTLFile_clicked();
-	void OnAddSTLFile_clicked_2();
+	void OnAddSTL1File_clicked();
+	void OnAddSTL2File_clicked();
 	void StartRegistration();
 	void OnRightButtonPress(vtkObject* caller, unsigned long vtk_event);
 	void OnRightButtonPress_2(vtkObject* caller, unsigned long vtk_event);
 	void OnSetSaveTXT_clicked();
-	void OnChangePropertyColor_clicked();
+	void OnSetSaveSTL_clicked();
+	void OnChangePropertyColor_model1_clicked();
+	void OnChangePropertyColor_model2_clicked();
 	void OnChangeRegistration_clicked();
 
 private:

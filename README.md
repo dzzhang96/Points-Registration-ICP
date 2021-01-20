@@ -1,4 +1,8 @@
-# Points-Registration-ICP
+﻿# Points-Registration-ICP
+
+Orbital Rim Registration Software V1.1
+
+Save the registered model by multiplying the transform matrix.
 
 Orbital Rim Registration Software V1.0
 

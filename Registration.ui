@@ -6,155 +6,557 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1123</width>
-    <height>980</height>
+    <width>921</width>
+    <height>859</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>800</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>1156</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Registration</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QVTKWidget" name="qvtkWidget_registration" native="true">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>470</y>
-      <width>521</width>
-      <height>421</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 0, 0);</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>0</y>
-      <width>1051</width>
-      <height>461</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1">
-     <item>
-      <widget class="QVTKWidget" name="qvtkWidget_before" native="true">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(0, 0, 0);</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QVTKWidget" name="qvtkWidget_after" native="true">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(0, 0, 0);</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QPushButton" name="pushButton_registration">
-    <property name="geometry">
-     <rect>
-      <x>860</x>
-      <y>710</y>
-      <width>151</width>
-      <height>46</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Start</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>570</y>
-      <width>152</width>
-      <height>222</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QPushButton" name="pushButton_STL1">
-       <property name="text">
-        <string>InputSTL1</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_STL2">
-       <property name="text">
-        <string>InputSTL2</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="modelColor_pushButton">
-       <property name="text">
-        <string>ChangeColor</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_savetxt">
-       <property name="text">
-        <string>SaveTXT</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>580</y>
-      <width>272</width>
-      <height>70</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QCheckBox" name="checkBox_stl">
-       <property name="text">
-        <string>STL Registrastion</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="checkBox_points">
-       <property name="text">
-        <string>Points Registration</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
+   <layout class="QHBoxLayout" name="horizontalLayout_7">
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0" colspan="2">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>InputSTL1:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QVTKWidget" name="qvtkWidget_before" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>440</width>
+              <height>385</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(0, 0, 0);</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_5">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>InputSTL2:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QVTKWidget" name="qvtkWidget_after" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>440</width>
+              <height>385</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(0, 0, 0);</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>RegistrationResult:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QVTKWidget" name="qvtkWidget_registration" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>440</width>
+            <height>385</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(0, 0, 0);</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="1">
+       <widget class="QGroupBox" name="groupBox">
+        <property name="minimumSize">
+         <size>
+          <width>440</width>
+          <height>402</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="title">
+         <string>Operations:</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QPushButton" name="pushButton_STL1">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton:hover{background-color:rgb(100,149,237);border-radius: 8px;  border: 2px groove rgb(100,149,237);border-style: outset;} 
+
+QPushButton{background-color:rgb(58,95,205);color: white;border-radius: 8px;  border: 2px groove gray;border-style: outset;} 
+
+QPushButton:pressed{background-color:rgb(58,95,205);color:white; border-radius: 8px;  border: 2px groove gray;border-style: outset;} 
+
+QPushButton:default{boder-color:rgb(64,64,255)}
+
+QPushButton:flat{boder:none}
+</string>
+             </property>
+             <property name="text">
+              <string>InputSTL1</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>10</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="model1Color_pushButton">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton:hover{background-color:rgb(100,149,237);border-radius: 8px;  border: 2px groove rgb(100,149,237);border-style: outset;} 
+
+QPushButton{background-color:rgb(58,95,205);color: white;border-radius: 8px;  border: 2px groove gray;border-style: outset;} 
+
+QPushButton:pressed{background-color:rgb(58,95,205);color:white; border-radius: 8px;  border: 2px groove gray;border-style: outset;} 
+
+QPushButton:default{boder-color:rgb(64,64,255)}
+
+QPushButton:flat{boder:none}
+</string>
+             </property>
+             <property name="text">
+              <string>ChangeSTL1Color</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>STL1_Path：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="STL1Name_lineEdit">
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QPushButton" name="pushButton_STL2">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton:hover{background-color:rgb(100,149,237);border-radius: 8px;  border: 2px groove rgb(100,149,237);border-style: outset;} 
+
+QPushButton{background-color:rgb(58,95,205);color: white;border-radius: 8px;  border: 2px groove gray;border-style: outset;} 
+
+QPushButton:pressed{background-color:rgb(58,95,205);color:white; border-radius: 8px;  border: 2px groove gray;border-style: outset;} 
+
+QPushButton:default{boder-color:rgb(64,64,255)}
+
+QPushButton:flat{boder:none}
+</string>
+             </property>
+             <property name="text">
+              <string>InputSTL2</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>10</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="model2Color_pushButton">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton:hover{background-color:rgb(100,149,237);border-radius: 8px;  border: 2px groove rgb(100,149,237);border-style: outset;} 
+
+QPushButton{background-color:rgb(58,95,205);color: white;border-radius: 8px;  border: 2px groove gray;border-style: outset;} 
+
+QPushButton:pressed{background-color:rgb(58,95,205);color:white; border-radius: 8px;  border: 2px groove gray;border-style: outset;} 
+
+QPushButton:default{boder-color:rgb(64,64,255)}
+
+QPushButton:flat{boder:none}
+</string>
+             </property>
+             <property name="text">
+              <string>ChangeSTL2Color</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>STL2_Path：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="STL2Name_lineEdit">
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QCheckBox" name="checkBox_stl">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Global Registration</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox_points">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Points Registration</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_registration">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton:hover{background-color:rgb(100,149,237);border-radius: 8px;  border: 2px groove rgb(100,149,237);border-style: outset;} 
+
+QPushButton{background-color:rgb(58,95,205);color: white;border-radius: 8px;  border: 2px groove gray;border-style: outset;} 
+
+QPushButton:pressed{background-color:rgb(58,95,205);color:white; border-radius: 8px;  border: 2px groove gray;border-style: outset;} 
+
+QPushButton:default{boder-color:rgb(64,64,255)}
+
+QPushButton:flat{boder:none}
+</string>
+           </property>
+           <property name="text">
+            <string>Start Registration</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_saveSTL">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton:hover{background-color:rgb(100,149,237);border-radius: 8px;  border: 2px groove rgb(100,149,237);border-style: outset;} 
+
+QPushButton{background-color:rgb(58,95,205);color: white;border-radius: 8px;  border: 2px groove gray;border-style: outset;} 
+
+QPushButton:pressed{background-color:rgb(58,95,205);color:white; border-radius: 8px;  border: 2px groove gray;border-style: outset;} 
+
+QPushButton:default{boder-color:rgb(64,64,255)}
+
+QPushButton:flat{boder:none}
+</string>
+           </property>
+           <property name="text">
+            <string>Save RegisteredSTL2</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>STL2_NewPath：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="STL2RegistrationName_lineEdit">
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1123</width>
-     <height>37</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
